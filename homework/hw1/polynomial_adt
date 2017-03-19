@@ -1,0 +1,8 @@
+Polynomial ADT
+
+1. +: Polynomial->Polynomial->Polynomial
+  Polynomial인 두 객체를 더하여 새로운 Polynomial 값을 계산한다.
+2. *: Polynomial->Polynomial->Polynomial
+  Polynomial인 두 객체를 곱하여 새로운 Polynomial 값을 계산한다.
+3. derivative: Polynomial->Polynomial
+  Polynomial을 미분한 Polynomial 값을 계산한다.

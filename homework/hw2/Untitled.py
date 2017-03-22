@@ -22,6 +22,7 @@ class List(object):
             self.last.next = node
             node.previous = self.last
             self.last = node
+            
     def __str__(self):
         string = ""
         point = self.first
@@ -30,7 +31,16 @@ class List(object):
             point = point.next
         return string
 
-def Stack(List):
+class Queue(List):
+    def enque(self,value):
+        self.append(value)
+
+    def deque(self):
+        self.temp = self.first
+        self.first = self.first.next
+        #return self.temp
+
+class Stack(List):
     def push(self,value):
         self.append(value)
 
@@ -38,14 +48,14 @@ def Stack(List):
         self.temp = self.last
         print(self.temp)
         self.last = self.last.previous
+        #return self.temp
+        
+        
+stack = Stack()
+for i in range(5):
+    stack.append(i)
 
-def Queue(List):
-    def enque(self, value):
-        self.append(value)
-
-    def deque(self):
-        self.temp = self.first
-        self.first = self.first.next
-        return self.temp
-
-
+print(stack)
+stack.push(9)
+print(stack)
+stack.pop()

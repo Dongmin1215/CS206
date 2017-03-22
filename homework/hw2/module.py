@@ -1,13 +1,12 @@
 class Node(object):
-    def __init__(sel):
+    def __init__(self,value):
+        self.value = value
         self.next = None
         self.previous = None
 
-    def set_next():
-        self.next = None
+    def __str__(self):
+        return str(self.value)
 
-    def get_next():
-        return sefl.next
 
 class List(object):
     def __init__(self):
@@ -27,10 +26,11 @@ class List(object):
         string = ""
         point = self.first
         while point != None:
-            string = string +"" + str(point.other)
+            string = string +" " + str(point)
             point = point.next
         return string
 
 list1 = List()
-list1.append(3)
+for i in range(10): 
+    list1.append(i)
 print(list1)

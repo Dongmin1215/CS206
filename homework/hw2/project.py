@@ -38,39 +38,40 @@ class Queue(List):
     def deque(self):
         self.temp = self.first
         self.first = self.first.next
-        return self.temp
+        return self.temp.value
 
 class Stack(List):
-    def push(self,value):
+    def push(self,value): 
         self.append(value)
 
     def pop(self):
         self.temp = self.last
-        print(self.temp)
         self.last = self.last.previous
-        return self.temp
+        return self.temp.value
 
 
 
-queue_1 = Queue()
-queue_2 = Queue()
-queue_3 = Queue()
+if __name__ == '__main__':
+    queue_first_class = Queue()
+    queue_business_class = Queue()
+    queue_economy_class = Queue()
 
-valid = True
+    valid = True
 
-while valid:
-    raw_input = input()
-    for i in range(len(raw_input)):
-        if "3" == raw_input[i]:
-            queue_3.append(raw_input)
-        if "2" == raw_input[i]:
-            queue_2.append(raw_input)
-        if "1" == raw_input[i]:
-            queue_1.append(raw_input)
-    if raw_input == "done":
-        valid = False
+    while valid:
+        raw_input = input()
+        for i in range(len(raw_input)):
+            if "3" == raw_input[i]:
+                queue_economy_class.append(raw_input)
+            if "2" == raw_input[i]:
+                queue_business_class.append(raw_input)
+            if "1" == raw_input[i]:
+                queue_first_class.append(raw_input)
+        if raw_input == "done":
+            valid = False
 
 
-print(queue_1,queue_2, queue_3)
+    print(queue_first_class,queue_business_class, queue_economy_class)
+
 
  

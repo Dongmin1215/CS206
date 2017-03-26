@@ -51,6 +51,8 @@ class Stack(List):
     def pop(self):
         self.temp = self.last
         self.last = self.last.previous
+        if self.last is None:
+            self.first = None
         return self.temp.value
 
 #define a function which calculate the infix
@@ -77,7 +79,15 @@ def evaluate(infix):
     def read_num(cur):
         if infix[cur] == '(':
             return read_phrase(cur)
+
+        if infix[cur] == '-':
+            cur += 1
+            cur = read_num(cur)
+            num_stack.push(- num_stack.pop())
+            return cur
+
         #save the number in the ret
+
         ret = 0
        #since the number can be larger than 10
         while not is_op(infix[cur]):
@@ -137,9 +147,14 @@ def evaluate(infix):
 if __name__ == '__main__':
     expr1 = '1+(2+3)'
     expr2 = '((3+5)*((16/3)-2))'
+    expr3 = '(-5*(-1+6))'
+
+
+    print("%s = %d (%d)" %(expr1, evaluate(expr1), int(eval(expr1))))
+    print("%s = %d (%d)" %(expr2, evaluate(expr2), int(eval(expr2))))
+    print("%s = %d (%d)" %(expr3, evaluate(expr3), int(eval(expr3))))
 
     print("%s = %d" %(expr1, evaluate(expr1)))
     print("%s = %d" %(expr2, evaluate(expr2)))
-
 
 

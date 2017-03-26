@@ -48,6 +48,8 @@ class Stack(List):
     def pop(self):
         self.temp = self.last
         self.last = self.last.previous
+        if self.last is None:
+            self.first = None
         return self.temp.value
 
 

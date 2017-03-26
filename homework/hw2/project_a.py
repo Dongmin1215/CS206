@@ -65,6 +65,11 @@ def evaluate(infix):
     def read_num(cur):
         if infix[cur] == '(':
             return read_phrase(cur)
+        if infix[cur] == '-':
+            cur += 1
+            cur = read_num(cur)
+            num_stack.push(- num_stack.pop())
+            return cur
         ret = 0
         while not is_op(infix[cur]):
             ret *= 10
@@ -120,9 +125,11 @@ def evaluate(infix):
 if __name__ == '__main__':
     expr1 = '1+(2+3)'
     expr2 = '((3+5)*((16/3)-2))'
+    expr3 = '(-5*(-1+6))'
 
     print("%s = %d (%d)" %(expr1, evaluate(expr1), int(eval(expr1))))
     print("%s = %d (%d)" %(expr2, evaluate(expr2), int(eval(expr2))))
+    print("%s = %d (%d)" %(expr3, evaluate(expr3), int(eval(expr3))))
 
 
 

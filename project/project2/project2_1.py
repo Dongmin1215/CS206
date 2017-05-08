@@ -147,7 +147,7 @@ class Tree(object):
                 stack.append(cur.right)
             if hasattr(cur, 'left'):
                 stack.append(cur.left)
-            result += '%s\n ' %cur.value
+            result += '%s\n' %cur.value
 
         return result
 
@@ -167,18 +167,18 @@ class Tree(object):
                 if hasattr(cur.entry, 'left'):
                     stack.append(FunctionCall(entry=cur.entry.left, status=0))
             else:
-                result += '%s ' %cur.entry.value
+                result += '%s\n' %cur.entry.value
 
         return result
 
-    # read textfile that includes questions
+    #read textfile that includes questions
     @classmethod
     def read_txt(cls, filename, preorder=True):
         with open(filename, 'r') as f:
             tree_list = [s.strip() for s in f.readlines()]
             return cls.read_preorder(tree_list) if preorder else cls.read_postorder(tree_list)
 
-    # read textfile in preorder
+    #read textfile in preorder
     @classmethod
     def read_preorder(cls, tree_list):
         _tree_list = tree_list[:]
@@ -201,8 +201,7 @@ class Tree(object):
             raise SyntaxError('Invalid syntax')
 
         return ret
-
-# Class for noticing the option
+# Make a class that makes an option
 class Option(object):
     def __init__(self, value=None):
         self.__value = value
@@ -227,17 +226,15 @@ class right(some):
 class left(some):
     pass
 
-# make a quiz 
+# make a quiz game
 def quiz(tree):
-    def ask(prompt, Y=lambda: none(), N=lambda: none(), U=lambda: prev()):
+    def ask(prompt, Y=lambda: none(), N=lambda: none()):
         ans = input(prompt)
         if ans == 'Y':
             return Y()
         elif ans == 'N':
             return N()
-        elif ans == 'U':
-            return U()
-        return ask(prompt, Y, N, U)
+        return ask(prompt, Y, N)
 
     # turn prev into none, and turn none into none_case
     def return_process(ret, none_case):
@@ -256,20 +253,19 @@ def quiz(tree):
                 entry = input('I give up. What are you? ')
                 print(f'Please type a yes/no question that will distinguish a { entry } from a { cur.value }')
                 question = input('Your question: ')
-                return ask(f'As a { entry }, { question } Please answer [Y or N or U] ',
+                return ask(f'As a { entry }, { question } Please answer [Y or N] ',
                            lambda: TreeEntry(question) \
                                    | left(entry) \
                                    | right(cur),
                            lambda: TreeEntry(question) \
                                    | left(cur) \
-                                   | right(entry),
-                           lambda: none())
-            return return_process(ask(f'My guess is { cur.value }. Am I right? [Y or N or U] ',
+                                   | right(entry))
+            return return_process(ask(f'My guess is { cur.value }. Am I right? [Y or N] ',
                                       lambda: cur,
                                       ask_name),
                                   lambda: traversal(cur))
         else:
-            return return_process(ask(f'{ cur.value } [Y or N or U] ',
+            return return_process(ask(f'{ cur.value } [Y or N] ',
                                       lambda: cur \
                                               | left(traversal(cur.left)),
                                       lambda: cur \
@@ -282,6 +278,7 @@ def quiz(tree):
                lambda: quiz(Tree(ret)),
                lambda: Tree(ret))
 
+# the reason why the "save as" is beacuse when the user answers N in the last question, we get the answer of the user and the question that we can differetiate with the answer of the user and the expected answer and save it into new file 
 code = """filename = input("Enter filename: ")
 preorder = input("preorder or postorder: ")
 if preorder in ('preorder', 'postorder'):
@@ -292,6 +289,7 @@ if preorder in ('preorder', 'postorder'):
         f.write(t.preorder() if is_preorder else t.postorder())
     print(t)
 """
+
 
 if __name__ == '__main__':
     print('######################################## CODE ########################################')

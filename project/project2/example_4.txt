@@ -1,0 +1,9 @@
+Are you a mammal?
+Are you bigger than a cat?
+Can you understand the python code?
+Human
+Kangaroo
+Mouse
+Do you live underwater?
+Trout
+Robin

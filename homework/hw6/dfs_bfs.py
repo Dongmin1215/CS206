@@ -8,7 +8,11 @@ class WUG():
         self.edge_count = 0
 
     def __str__(self):
-        return 'V: {}\nE: {}'.format(self.vertex_list, self.vertex_dict)
+        V = self.vertex_list
+        E = [[v1, v2] \
+                for v1, edges in self.vertex_dict.items() \
+                for v2 in edges]
+        return 'V: {}\nE: {}\n'.format(V, E)
 
     # finds wheter vertex is the vertex of the graph
     def isVertex(self,vertex):
@@ -165,6 +169,19 @@ def BFS(graph):
 
 if __name__ == '__main__':
     filename = input("File name : ")
+    tree_format = input("DFS or BFS: ")
     with open(filename,'r') as f:
-        exec(f.read())
+        try:
+            exec(f.read())
+            if not 'wug' in locals():
+                raise SyntaxError
+        except:
+            print('invalid file format')
+        else:
+            if tree_format == 'DFS':
+                print(DFS(wug))
+            elif tree_format == 'BFS':
+                print(BFS(wug))
+            else:
+                print('invalid tree format')
 

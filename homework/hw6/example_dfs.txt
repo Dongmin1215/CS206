@@ -1,0 +1,20 @@
+# we need WUG object named wug
+v1 = Vertex('v1')
+v2 = Vertex('v2')
+v3 = Vertex('v3')
+v4 = Vertex('v4')
+
+wug = WUG()
+
+wug.addVertex(v1)
+wug.addVertex(v2)
+wug.addVertex(v3)
+wug.addVertex(v4)
+
+# since graph is not weighted, we set the weight of the edge to 1
+wug.addEdge(v1, v2, 1)
+wug.addEdge(v2, v3, 1)
+wug.addEdge(v2, v4, 1)
+wug.addEdge(v3, v4, 1)
+wug.addEdge(v1, v4, 1)
+
